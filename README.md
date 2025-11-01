@@ -1,5 +1,10 @@
 # Token-Gated Members Portal
-
+    ██╗     ██╗██╗     ██╗     ██████╗██╗     ██╗
+    ██║     ██║██║     ██║    ██╔════╝██║     ██║
+    ██║     ██║██║     ██║    ██║     ██║     ██║
+    ██║     ██║██║     ██║    ██║     ██║     ██║
+    ███████╗██║███████╗██║    ╚██████╗███████╗██║
+    ╚══════╝╚═╝╚══════╝╚═╝     ╚═════╝╚══════╝╚═╝
 Bootstrapped with Next.js 14 App Router, Tailwind CSS, TanStack Query, and Solana wallet adapter UI. This template gives you a turnkey membership portal gated by SPL token balance.
 
 ## Features
