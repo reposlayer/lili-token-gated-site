@@ -4,15 +4,21 @@ export type GateCheckResult = {
   hasAccess: boolean;
   balance: number;
   requiredMint: string;
+  requiredBalance: number;
+  decimals: number;
 };
 
 export async function checkAccess({
   owner,
   mint,
+  minBalance = 0,
+  decimals = 0,
   rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC ?? "https://api.devnet.solana.com"
 }: {
   owner: string;
   mint: string;
+  minBalance?: number;
+  decimals?: number;
   rpcUrl?: string;
 }): Promise<GateCheckResult> {
   const connection = new Connection(rpcUrl, "confirmed");
@@ -33,9 +39,13 @@ export async function checkAccess({
     return acc + amount;
   }, 0);
 
+  const threshold = Number(minBalance ?? 0);
+
   return {
-    hasAccess: balance > 0,
+    hasAccess: balance >= threshold,
     balance,
-    requiredMint: mint
+    requiredMint: mint,
+    requiredBalance: threshold,
+    decimals
   };
 }

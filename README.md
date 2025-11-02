@@ -27,6 +27,8 @@ Set up environment variables in `.env.local`:
 ```env
 NEXT_PUBLIC_SOLANA_RPC=https://api.devnet.solana.com
 NEXT_PUBLIC_REQUIRED_MINT=TokenMintPublicKey
+NEXT_PUBLIC_REQUIRED_DECIMALS=0
+NEXT_PUBLIC_REQUIRED_BALANCE=1
 NEXT_PUBLIC_COMMUNITY_NAME=Lili Collective
 ```
 

@@ -3,7 +3,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { GateCheckResult, checkAccess } from "../../lib/gating";
-import { COMMUNITY_NAME, REQUIRED_MINT } from "../../lib/constants";
+import {
+  COMMUNITY_NAME,
+  REQUIRED_MINT,
+  REQUIRED_BALANCE,
+  REQUIRED_DECIMALS
+} from "../../lib/constants";
 
 export default function MemberPage() {
   const { publicKey } = useWallet();
@@ -22,7 +27,12 @@ export default function MemberPage() {
     setState({ loading: true });
 
     try {
-      const result = await checkAccess({ owner: publicKey.toBase58(), mint: REQUIRED_MINT });
+      const result = await checkAccess({
+        owner: publicKey.toBase58(),
+        mint: REQUIRED_MINT,
+        minBalance: REQUIRED_BALANCE,
+        decimals: REQUIRED_DECIMALS
+      });
       setState({ loading: false, result });
     } catch (error: unknown) {
       setState({ loading: false, error: error instanceof Error ? error.message : String(error) });
@@ -74,7 +84,9 @@ export default function MemberPage() {
           <p className="text-slate-300">
             This area is restricted to holders of mint <span className="font-mono">{REQUIRED_MINT}</span>.
           </p>
-          <p className="text-slate-400">Balance detected: {state.result?.balance ?? 0}</p>
+          <p className="text-slate-400">
+            Balance detected: {state.result?.balance ?? 0} / Required: {state.result?.requiredBalance ?? REQUIRED_BALANCE}
+          </p>
         </div>
       </div>
     );
@@ -87,6 +99,13 @@ export default function MemberPage() {
         <p className="mt-2 text-slate-300">
           This is your secure members area. Wire real content here: announcements, gated downloads,
           governance dashboards, or anything your community needs.
+        </p>
+        <p className="mt-2 text-sm text-slate-400">
+          Membership balance detected: {(state.result?.balance ?? 0).toLocaleString(undefined, {
+            maximumFractionDigits: 6
+          })} (required {(state.result?.requiredBalance ?? REQUIRED_BALANCE).toLocaleString(undefined, {
+            maximumFractionDigits: 6
+          })})
         </p>
       </div>
       <section className="grid gap-4 sm:grid-cols-2">
