@@ -9,11 +9,11 @@ Bootstrapped with Next.js 14 App Router, Tailwind CSS, TanStack Query, and Solan
 
 ## Features
 
-- ✅ Wallet connect modal with Phantom and Solflare adapters
-- ✅ Token balance gate backed by `@solana/web3.js`
-- ✅ App Router + Tailwind styling
-- ✅ Environment-driven configuration for RPC endpoint, mint address, and community name
-- ✅ Ready-to-extend members dashboard with placeholder sections
+-  Wallet connect modal with Phantom and Solflare adapters
+-  Token balance gate backed by `@solana/web3.js`
+-  App Router + Tailwind styling
+-  Environment-driven configuration for RPC endpoint, mint address, and community name
+-  Ready-to-extend members dashboard with placeholder sections
 
 ## Getting Started
 
